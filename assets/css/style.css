@@ -1,0 +1,60 @@
+html, body {
+    color: white;
+    background-color: black;
+    font-family: 'Exo', sans-serif;
+    word-spacing: 2px;
+}
+
+#nebula {
+    position: fixed;
+    width: 100%;
+    max-width:2000px;
+    height: auto;
+    object-fit: cover;
+    top: 0;
+}
+
+#container {
+    width: 100%;
+    max-width: 700px;
+    margin: auto;
+    height: auto;
+    text-align: center;
+    margin-top: 250px;
+    padding: 20px;
+    border-radius: 50px;
+}
+
+h1, h2, p {
+    padding: 10px;
+    font-size: 1.2em;
+}
+
+h2 {
+    font-size: 1em;
+}
+
+button {
+    border: none; 
+    background: #32394b;
+    padding: 15px;
+    cursor: pointer;
+    margin: 15px;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: 1.2em;
+    color: white;
+    border-radius: 20%;
+    display: inline-block;
+    box-sizing: border-box;
+    z-index: 1000;
+}
+
+#earth {
+    position: fixed;
+    width: 100%;
+    max-width:2000px;
+    height: auto;
+    object-fit: cover;
+    bottom: 0;
+    
+}

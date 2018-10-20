@@ -51,7 +51,7 @@ $(document).ready(function() {
         }];
 
     $(document).on('click', '#start', function(event) {
-        $('#titles').prepend('<h2>Time Remaining: <span id="clockFace">15</span> Seconds</h2>');
+        $('#timer').prepend('<h2>Time Remaining: <span id="clockFace">15</span> Seconds</h2>');
         questionGetter();
     });
     
@@ -59,22 +59,23 @@ $(document).ready(function() {
         reset();
     });
     
-    $(document).on('click', '.new-buttons', function(event) {
+    $(document).on('click', '.answer-buttons', function(event) {
         clicked(event);
     });
-    
     
         let currentQuestion = 0;
         let clock = 15;
         let correct = 0;
         let wrong = 0;
-
+        let dingding = new Audio ("assets/sounds/winning.mp3")
+        let bzzt = new Audio ("assets/sounds/losing.mp3")
+        let outtaTime = new Audio ("assets/sounds/timesup.mp3")
 
         function questionGetter(){
         timer = setInterval(clockTick, 1000);
-        $('#testing-ground').html('<h2>' + questions[currentQuestion].question + '</h2>' );
+        $('#testing-ground').html('<p>' + questions[currentQuestion].question + '</p>' );
         for (var i = 0; i < questions[currentQuestion].answers.length; i++){
-            $('#testing-ground').append('<button class="new-buttons" id="button"' + 'data-name="' + questions[currentQuestion].answers[i] + '">' + questions[currentQuestion].answers[i]+ '</button>');
+            $('#testing-ground').append('<button class="answer-buttons"' + 'data-name="' + questions[currentQuestion].answers[i] + '">' + questions[currentQuestion].answers[i]+ '</button>');
         }
         }
 
@@ -88,16 +89,17 @@ $(document).ready(function() {
         }
 
         function timeUp(){
+            outtaTime.play();
             clearInterval(timer);
             $('#clockFace').html(clock);
         
-            $('#testing-ground').html('<h2>Time is Up!</h2>');
+            $('#testing-ground').html('<p>Apologies, But Time Is Up</p>');
             $('#testing-ground').append('<p>The Correct Answer was: ' + questions[currentQuestion].correctAnswer);
         
             if (currentQuestion === questions.length - 1){
                 setTimeout(endScreen, 1000 * 3);
             } else {
-                setTimeout(questionTransition, 1000 * 3);
+                setTimeout(questionTransition, 1000 * 4);
             }
         }
 
@@ -111,12 +113,13 @@ $(document).ready(function() {
         function endScreen() {
         clearInterval(timer);
     
-        $('#testing-ground').html('<h2>Here Is The End Result...</h2>');
+        $('#testing-ground').html('<h2>Now Wasn\'t that fun?</h2>');
         $('#clockFace').html(clock);
-        $('#testing-ground').append('<p>Correct Answers: ' + correct + '</p>');
-        $('#testing-ground').append('<p>Incorrect Answers: ' + wrong + '</p>');
-        $('#testing-ground').append('<p>Unanswered: ' + (questions.length - (wrong + correct)) + '</p>');
-        $('#testing-ground').append('<button id="start-over">Relive This Maddness?</button>');
+        $('#timer').text("");
+        $('#testing-ground').append('<p>Correct: ' + correct + '</p>');
+        $('#testing-ground').append('<p>Incorrect: ' + wrong + '</p>');
+        $('#testing-ground').append('<p>Timed-Out: ' + (questions.length - (wrong + correct)) + '</p>');
+        $('#testing-ground').append('<button id="start-over">Relive This Madness?</button>');
         }
 
 
@@ -131,9 +134,10 @@ $(document).ready(function() {
         }
 
         function wrongScreen() {
-        $('#testing-ground').html('<h2>No, That Is Incorrect. A shame...</h2>');
+            wrong++;
+            bzzt.play();
+        $('#testing-ground').html('<p>No, That Is Incorrect. A shame...</p>');
         $('#testing-ground').append('<p>The Correct Answer Was... ' + questions[currentQuestion].correctAnswer + '</p>');
-         wrong++;
         clearInterval(timer);
     
         if (currentQuestion === questions.length - 1){
@@ -146,12 +150,13 @@ $(document).ready(function() {
         function rightScreen(){
         clearInterval(timer);
         correct++;
-        $('#testing-ground').html('<h2>Yes, That Is Right. Impressive.</h2>');
+        dingding.play();
+        $('#testing-ground').html('<p>Yes, That Is Right. Impressive.</p>');
     
         if (currentQuestion === questions.length - 1){
-            setTimeout(endScreen, 1000 * 3);
+            setTimeout(endScreen, 1000 * 4);
         } else {
-            setTimeout(questionTransition, 1000 * 3);
+            setTimeout(questionTransition, 1000 * 4);
         }
         }
 

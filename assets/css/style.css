@@ -16,13 +16,13 @@ html, body {
 
 #container {
     width: 100%;
-    max-width: 700px;
+    max-width: 820px;
     margin: auto;
     height: auto;
     text-align: center;
     margin-top: 250px;
     padding: 20px;
-    border-radius: 50px;
+    box-sizing: border-box;
 }
 
 h1, h2, p {
@@ -32,6 +32,10 @@ h1, h2, p {
 
 h2 {
     font-size: 1em;
+}
+
+p {
+    line-height: 1.5;
 }
 
 button {
@@ -47,6 +51,19 @@ button {
     display: inline-block;
     box-sizing: border-box;
     z-index: 1000;
+}
+
+button:hover {
+    -webkit-filter: brightness(300%);
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+}
+
+button:active {
+    background: #244db6
 }
 
 #earth {

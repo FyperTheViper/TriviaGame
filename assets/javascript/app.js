@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    //question object
     let questions = [ {
             question: "What is the capital of Germany?",
             answers: ["Berlin", "Frankfurt", "Hamburg", "Oktoberfest"],
@@ -50,6 +51,7 @@ $(document).ready(function() {
             correctAnswer:"Venezuela",
         }];
 
+        //
     $(document).on('click', '#start', function(event) {
         $('#timer').prepend('<h2>Time Remaining: <span id="clockFace">15</span> Seconds</h2>');
         questionGetter();
@@ -72,6 +74,7 @@ $(document).ready(function() {
         let outtaTime = new Audio ("assets/sounds/timesup.mp3")
 
         function questionGetter(){
+        $('#timer').show();
         timer = setInterval(clockTick, 1000);
         $('#testing-ground').html('<p>' + questions[currentQuestion].question + '</p>' );
         for (var i = 0; i < questions[currentQuestion].answers.length; i++){
@@ -115,7 +118,7 @@ $(document).ready(function() {
     
         $('#testing-ground').html('<h2>Now Wasn\'t that fun?</h2>');
         $('#clockFace').html(clock);
-        $('#timer').text("");
+        $('#timer').hide();
         $('#testing-ground').append('<p>Correct: ' + correct + '</p>');
         $('#testing-ground').append('<p>Incorrect: ' + wrong + '</p>');
         $('#testing-ground').append('<p>Timed-Out: ' + (questions.length - (wrong + correct)) + '</p>');

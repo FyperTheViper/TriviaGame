@@ -1,7 +1,7 @@
 # TriviaGame
 A trivia game with timed events.
 
-[The Link to my Geography Trivia] (https://fypertheviper.github.io/TriviaGame/)
+The Link to my Geography Trivia: https://fypertheviper.github.io/TriviaGame/
 
 I created a trivia game based on Geography questions. It will show only one question at a time until the player answers it or their time runs out.
 
